@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { CtaLink } from "@/components/Button";
 import { IconClose, IconMenu, IconPhone } from "@/components/Icons";
 import { LogoLockup } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { site } from "@/lib/site";
 
 const NAV = [
@@ -75,7 +76,7 @@ export function SiteHeader() {
     <header
       className={`sticky top-0 z-40 border-b transition-colors duration-300 ${
         solid || open
-          ? "border-line bg-ink-950/85 backdrop-blur-md"
+          ? "border-line bg-page/90 backdrop-blur-md"
           : "border-transparent"
       }`}
     >
@@ -98,7 +99,7 @@ export function SiteHeader() {
                   className={`relative block py-2 text-[0.75rem] font-semibold uppercase tracking-[0.14em] transition-colors duration-200 ${
                     active === item.id
                       ? "text-accent"
-                      : "text-fg-muted hover:text-silver-100"
+                      : "text-fg-muted hover:text-fg-strong"
                   }`}
                 >
                   {item.label}
@@ -122,7 +123,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href={site.phone.href}
-            className="hidden items-center gap-2 text-[0.875rem] font-semibold text-silver-200 transition-colors hover:text-accent xl:inline-flex"
+            className="hidden items-center gap-2 text-[0.875rem] font-semibold text-fg transition-colors hover:text-accent xl:inline-flex"
           >
             <IconPhone className="size-4 text-accent" />
             {site.phone.display}
@@ -132,13 +133,15 @@ export function SiteHeader() {
             Get a Free Quote
           </CtaLink>
 
+          <ThemeToggle />
+
           <button
             type="button"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
             aria-expanded={open}
             aria-controls="mobile-nav"
-            className="grid size-11 place-items-center rounded-md border border-line-strong text-silver-200 transition-colors hover:border-accent/60 hover:text-accent lg:hidden"
+            className="grid size-11 place-items-center rounded-md border border-line-strong text-fg transition-colors hover:border-accent/60 hover:text-accent lg:hidden"
           >
             <IconMenu className="size-5" />
           </button>
@@ -154,18 +157,21 @@ export function SiteHeader() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-ink-950/97 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-50 bg-page/97 backdrop-blur-xl lg:hidden"
           >
             <div className="shell flex h-16 items-center justify-between md:h-20">
               <LogoLockup size={42} />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-                className="grid size-11 place-items-center rounded-md border border-line-strong text-silver-200 transition-colors hover:border-accent/60 hover:text-accent"
-              >
-                <IconClose className="size-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                  className="grid size-11 place-items-center rounded-md border border-line-strong text-fg transition-colors hover:border-accent/60 hover:text-accent"
+                >
+                  <IconClose className="size-5" />
+                </button>
+              </div>
             </div>
 
             <nav aria-label="Page sections">
@@ -175,7 +181,7 @@ export function SiteHeader() {
                     <a
                       href={`#${item.id}`}
                       onClick={() => setOpen(false)}
-                      className="flex items-center justify-between py-4 font-display text-[1.35rem] uppercase text-silver-100 transition-colors hover:text-accent"
+                      className="flex items-center justify-between py-4 font-display text-[1.35rem] uppercase text-fg-strong transition-colors hover:text-accent"
                     >
                       {item.label}
                       <span aria-hidden="true" className="text-accent">

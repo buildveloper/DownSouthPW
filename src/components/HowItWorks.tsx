@@ -65,7 +65,7 @@ export function HowItWorks() {
         <ol className="grid gap-10 md:grid-cols-3 md:gap-8">
           {steps.map((step) => (
             <li key={step.index} className="relative flex gap-5 md:block">
-              <span className="relative z-10 grid size-14 shrink-0 place-items-center rounded-sm border border-line bg-ink-950 font-display text-[1.3rem] leading-none text-accent md:size-16 md:text-[1.45rem]">
+              <span className="relative z-10 grid size-14 shrink-0 place-items-center rounded-sm border border-line bg-surface-raised font-display text-[1.3rem] leading-none text-accent md:size-16 md:text-[1.45rem]">
                 {step.index}
               </span>
 

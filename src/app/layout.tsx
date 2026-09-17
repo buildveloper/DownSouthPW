@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { StickyCTA } from "@/components/StickyCTA";
 import { StructuredData } from "@/components/StructuredData";
+import { themeInitScript } from "@/components/ThemeToggle";
 import { logo } from "@/lib/media";
 import { siteUrl } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -104,9 +105,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
       className={`${anton.variable} ${inter.variable} ${yellowtail.variable}`}
     >
       <body className="min-h-screen bg-page font-sans text-fg antialiased">
+        {/*
+          Theme before paint. Kept as the first node in the body so a returning
+          visitor who chose light never sees a dark flash. `suppressHydrationWarning`
+          above covers the attribute this may change.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2.5 focus:text-[0.875rem] focus:font-semibold focus:text-accent-ink"

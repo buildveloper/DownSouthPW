@@ -241,4 +241,137 @@ Motion is allowed when it answers something the reader did or explains structure
 `SPRING_SOFT` (240/30) for entrances; `SPRING_SNAP` (420/34) for presses. Entrance
 0.62s, arc 0.78s, state 0.26s, micro 0.16s.
 
-<!-- NEXT -->
+## 9. Themes
+
+There are two themes and a toggle, and both are driven by one attribute:
+
+```
+html[data-theme="dark"]   (default)
+html[data-theme="light"]
+```
+
+Because every component reads semantic tokens (`bg-page`, `text-fg`,
+`border-line`) rather than raw ramp values, the whole site re-skins on that
+attribute. The ramps — ink, silver, spray — never move, which is what keeps both
+themes looking like the same brand.
+
+**What changes, and what deliberately does not**
+
+| Token | Dark | Light |
+|---|---|---|
+| `page` | `#08090b` | `#f7f9fa` |
+| `surface` | `#0e1114` | `#eef1f3` |
+| `surface-raised` (cards, panels) | `#05070a` | `#ffffff` |
+| `line` / `line-strong` | `#232a30` / `#333d45` | `#dde2e5` / `#c3cbd0` |
+| `fg` / `fg-muted` / `fg-faint` | silver / grey | ink / grey |
+| `accent` (text + lines) | `#81b5cc` | `#2f647d` |
+| `surface-light` (always-light bands) | `#eef1f3` | `#ffffff` |
+| `veil` (hover fills) | white 5% | ink 5% |
+| `accent-fill` / `accent-ink` (the CTA) | constant | constant |
+
+Three decisions worth understanding:
+
+1. **The accent is two tokens.** `accent-fill` + `accent-ink` are the primary
+   button and stay `#81b5cc` / `#06212e` in both themes, so the conversion
+   element is the same recognisable object everywhere (and passes AAA on either
+   ground, at 9.4:1). `accent` is text and lines, and it darkens to `spray-700`
+   in light mode because the sampled blue only measures 2.1:1 on white.
+2. **The always-light bands keep fixed ink values.** Services, In Action, Why
+   Down South and FAQ are light in both themes, so their `text-ink-900` and
+   `border-ink-900/10` classes are correct as written. In light mode the
+   alternation becomes silver → white instead of black → silver, so the rhythm
+   survives the switch.
+3. **The logo never changes.** Its badge always sits on its native black plate
+   (`bg-black`), which is why it looks correct in both themes. Likewise, text
+   that sits **on a photograph** (the hero caption) keeps fixed silver values,
+   because that ground is the photo, not the theme.
+
+**Rules**
+
+- Default is dark: the owner's logo is a white badge on a black ground, so dark
+  is the brand's native presentation. A stored choice always wins.
+- New components must reference semantic tokens, never `ink-*`/`silver-*` ramps,
+  unless the ground is provably constant (a photograph, or the always-light
+  bands).
+
+## 10. Accessibility
+
+- **Keyboard:** the galleries are focusable scrollable regions with an
+  `aria-label`; controls have full labels including what they drive; the FAQ is
+  native `<details>`; the mobile sheet closes on Escape.
+- **Focus:** a 2px `focus-visible` outline everywhere — `spray-300` on dark,
+  `spray-700` on light bands — plus a skip link.
+- **Forms:** every input has a real `<label>`, `aria-invalid` plus
+  `aria-describedby` when invalid, inline error text, and focus moves to the
+  first invalid field on submit. Errors use `role="alert"`.
+- **Contrast** is measured, not assumed (see §3 and §9). The primary CTA passes
+  AAA on both grounds.
+- **Motion** honours `prefers-reduced-motion` twice (§8).
+- **Imagery:** every job photo has descriptive alt text written from what is
+  actually visible — describing the *transformation*, not just the subject.
+- No carousel library, no modal library, no tab-trap.
+
+---
+
+## 11. Responsive
+
+Designed from a 390px viewport upward, not a desktop layout squeezed down.
+
+- Galleries are snap-scroll rails on **every** breakpoint, with a deliberate peek
+  of the next tile so scrollability is obvious without arrows.
+- The services grid is 1 → 2 → 3 columns; the quote form is single-column on
+  mobile with full-width, 44px+ touch targets.
+- The sticky CTA is a bottom bar on mobile (two equal buttons,
+  `env(safe-area-inset-bottom)` aware) and a floating pill on desktop.
+- Mobile nav is a full-screen sheet, and it also carries the theme toggle.
+- The `hoverable:` custom variant keeps hover styling off touch devices, so a tap
+  never leaves a card stuck in its hover state.
+- Typography is fluid (`clamp()`), so there are no breakpoint text jumps.
+
+---
+
+## 12. Performance
+
+- The page is **static**. One dynamic route: `/api/quote`.
+- No icon library, no carousel library, no form library. Runtime dependencies:
+  `next`, `react`, `react-dom`, `framer-motion`.
+- Fonts self-hosted via `next/font`; no font flash, no layout shift.
+- Images are local and served through `next/image` (WebP, responsive `sizes`,
+  lazy below the fold, `priority` on the hero only).
+- No SVG blur filters: the arc's glow is layered strokes, because a real gaussian
+  blur over that area is one of the few effects that reliably stutters on a
+  mid-range phone.
+- One ambient gradient, in the hero, and nowhere else.
+
+---
+
+## 13. Conversion principles applied
+
+- **Proof before promises.** A real before/after is in the hero; the gallery is
+  section 4; "In Action" shows the person who will be on the property.
+- **The phone is always one tap away** — header, hero, every section close, the
+  sticky bar and the footer, plus an `sms:` link for photo-by-text.
+- **Price objection handled up front:** the form asks for a photo instead of a
+  site visit, and the FAQ answers "how much" first and honestly.
+- **Every service card routes into the quote form** with the service
+  pre-selected, so nobody picks the same option twice.
+- **No invented numbers.** No "500+ happy customers", no rating aggregate, no
+  price ranges. Every claim is either verifiable or flagged.
+- **Failure paths are conversion paths.** If the form cannot send, the error
+  panel offers call, text and a pre-filled email with the details intact — a
+  lead is never lost to a silent failure.
+
+---
+
+## 14. Things to avoid (anti-patterns)
+
+- A third background colour, or a second large gradient.
+- Purple-blue AI gradients, glassmorphism, oversized rounded cards.
+- An icon per service — the most generic pattern in this trade. Numbered cards
+  read like a scope of work instead.
+- An icon + heading + paragraph grid where concrete deliverables belong.
+- Decorative motion below the fold, or a fade-up wrapper on every section.
+- Rounded-everything, `shadow-2xl` on everything, pill buttons.
+- Filling gaps with stock photography. There are no stock images in this repo and
+  there never should be — the real photos are the entire advantage.
+- Copy that could belong to any company in any city.

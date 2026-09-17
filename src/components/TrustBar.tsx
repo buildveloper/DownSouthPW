@@ -45,12 +45,12 @@ export function TrustBar() {
             <li key={item.label} className="flex items-start gap-3.5">
               <span
                 aria-hidden="true"
-                className="grid size-10 shrink-0 place-items-center rounded-sm border border-line bg-ink-950/70 text-accent"
+                className="grid size-10 shrink-0 place-items-center rounded-sm border border-line bg-surface-raised text-accent"
               >
                 <item.icon className="size-[1.15rem]" />
               </span>
               <span className="flex flex-col gap-1">
-                <span className="text-[0.9375rem] font-semibold leading-tight text-silver-100">
+                <span className="text-[0.9375rem] font-semibold leading-tight text-fg-strong">
                   {item.label}
                   {"flag" in item && item.flag ? (
                     <DraftFlag label={item.flag} />

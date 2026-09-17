@@ -85,10 +85,10 @@ function validate(values: Values, photos: File[]): Errors {
   return errors;
 }
 
-const labelClass = "block text-[0.8125rem] font-semibold text-silver-200";
+const labelClass = "block text-[0.8125rem] font-semibold text-fg-strong";
 const fieldClass =
-  "mt-2 w-full rounded-md border border-line-strong bg-ink-950 px-3.5 py-3 text-[0.9375rem] text-silver-100 placeholder:text-fg-faint transition-colors duration-200 hover:border-ink-500 focus:border-accent";
-const errorClass = "mt-2 text-[0.8125rem] font-medium text-[#ff9f9f]";
+  "mt-2 w-full rounded-md border border-line-strong bg-field px-3.5 py-3 text-[0.9375rem] text-fg placeholder:text-fg-faint transition-colors duration-200 hover:border-ink-500 focus:border-accent";
+const errorClass = "mt-2 text-[0.8125rem] font-medium text-danger-fg";
 
 export function QuoteForm() {
   const [values, setValues] = useState<Values>(EMPTY);
@@ -209,12 +209,12 @@ export function QuoteForm() {
               <li key={item.title} className="flex gap-4">
                 <span
                   aria-hidden="true"
-                  className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-sm border border-line bg-ink-950 text-accent"
+                  className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-sm border border-line bg-surface-raised text-accent"
                 >
                   <IconCheck className="size-3.5" />
                 </span>
                 <span>
-                  <span className="block text-[0.9375rem] font-semibold text-silver-100">
+                  <span className="block text-[0.9375rem] font-semibold text-fg-strong">
                     {item.title}
                   </span>
                   <span className="mt-1 block text-[0.875rem] leading-relaxed text-fg-muted">
@@ -225,21 +225,21 @@ export function QuoteForm() {
             ))}
           </ul>
 
-          <div className="mt-9 rounded-lg border border-line bg-ink-950 p-5">
+          <div className="mt-9 rounded-lg border border-line bg-surface-raised p-5">
             <p className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-fg-faint">
               Rather just talk?
             </p>
             <div className="mt-4 flex flex-col gap-3">
               <a
                 href={site.phone.href}
-                className="inline-flex items-center gap-3 text-[0.9375rem] font-semibold text-silver-100 transition-colors hover:text-accent"
+                className="inline-flex items-center gap-3 text-[0.9375rem] font-semibold text-fg-strong transition-colors hover:text-accent"
               >
                 <IconPhone className="size-4 text-accent" />
                 {site.phone.display}
               </a>
               <a
                 href={`mailto:${site.email}`}
-                className="inline-flex items-center gap-3 text-[0.9375rem] text-silver-300 transition-colors hover:text-accent"
+                className="inline-flex items-center gap-3 text-[0.9375rem] text-fg-muted transition-colors hover:text-accent"
               >
                 <IconMail className="size-4 text-accent" />
                 <span className="break-all">{site.email}</span>
@@ -251,7 +251,7 @@ export function QuoteForm() {
           </div>
         </div>
 
-        <div className="lg:col-span-7"><div className="relative rounded-xl border border-line bg-ink-950 p-5 shadow-lift md:p-7">
+        <div className="lg:col-span-7"><div className="relative rounded-xl border border-line bg-surface-raised p-5 shadow-lift md:p-7">
           <span
             aria-hidden="true"
             className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-accent/45 to-transparent md:inset-x-7"
@@ -281,7 +281,7 @@ export function QuoteForm() {
                 ].map((line, i) => (
                   <li
                     key={line}
-                    className="flex items-start gap-3 text-[0.875rem] text-silver-300"
+                    className="flex items-start gap-3 text-[0.875rem] text-fg-muted"
                   >
                     <span className="mt-0.5 font-display text-[0.9375rem] leading-none text-accent">
                       {`0${i + 1}`}
@@ -299,7 +299,7 @@ export function QuoteForm() {
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
-                  className="text-[0.875rem] font-semibold text-silver-300 underline decoration-line-strong underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+                  className="text-[0.875rem] font-semibold text-fg-muted underline decoration-line-strong underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
                 >
                   Send another request
                 </button>
@@ -320,12 +320,12 @@ export function QuoteForm() {
               {status === "error" ? (
                 <div
                   role="alert"
-                  className="rounded-md border border-[#7c3234] bg-[#2a1416] p-4"
+                  className="rounded-md border border-danger-border bg-danger-bg p-4"
                 >
-                  <p className="text-[0.875rem] font-semibold text-[#ffa8a8]">
+                  <p className="text-[0.875rem] font-semibold text-danger-fg">
                     That did not send.
                   </p>
-                  <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-silver-300">
+                  <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-fg-muted">
                     {serverMessage}
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.8125rem] font-semibold">
@@ -499,7 +499,7 @@ export function QuoteForm() {
                 <div className="mt-2 flex flex-wrap items-center gap-4">
                   <label
                     htmlFor="q-photos"
-                    className="inline-flex h-11 cursor-pointer items-center gap-2 rounded-md border border-dashed border-line-strong px-4 text-[0.875rem] font-medium text-silver-300 transition-colors duration-200 hover:border-accent/70 hover:text-accent focus-within:border-accent"
+                    className="inline-flex h-11 cursor-pointer items-center gap-2 rounded-md border border-dashed border-line-strong px-4 text-[0.875rem] font-medium text-fg transition-colors duration-200 hover:border-accent/70 hover:text-accent focus-within:border-accent"
                   >
                     <IconUpload className="size-4" />
                     Add photos
@@ -541,7 +541,7 @@ export function QuoteForm() {
                           onClick={() =>
                             setPhotos(photos.filter((_, i) => i !== index))
                           }
-                          className="absolute -right-2 -top-2 grid size-6 place-items-center rounded-full border border-line-strong bg-ink-900 text-silver-300 transition-colors hover:border-accent hover:text-accent"
+                          className="absolute -right-2 -top-2 grid size-6 place-items-center rounded-full border border-line-strong bg-surface-raised text-fg-muted transition-colors hover:border-accent hover:text-accent"
                         >
                           <IconTrash className="size-3" />
                           <span className="sr-only">
@@ -609,7 +609,7 @@ export function QuoteForm() {
                   day,{" "}
                   <a
                     href={site.phone.sms}
-                    className="font-medium text-silver-300 underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+                    className="font-medium text-fg underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
                   >
                     text {site.phone.display}
                   </a>{" "}

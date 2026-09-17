@@ -24,7 +24,7 @@ export function Services() {
       <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => (
           <li key={service.id} className="flex">
-            <article className="group flex w-full flex-col rounded-lg border border-ink-900/10 bg-white/60 p-6 transition-colors duration-300 hover:border-accent-strong/35 hover:bg-white">
+            <article className="group flex w-full flex-col rounded-lg border border-ink-900/10 bg-card-light p-6 transition-colors duration-300 hover:border-accent-strong/35 hover:bg-white">
               <div className="flex items-center gap-4">
                 <span className="text-eyebrow font-semibold text-spray-700/75">
                   {service.index}

@@ -108,7 +108,7 @@ export function Hero() {
             Got a photo of the mess?{" "}
             <a
               href={site.phone.sms}
-              className="font-medium text-silver-300 underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+              className="font-medium text-fg underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
             >
               Text it to {site.phone.display}
             </a>{" "}
@@ -153,7 +153,7 @@ export function Hero() {
           />
 
           <motion.figure
-            className="relative overflow-hidden rounded-xl border border-line bg-ink-900 shadow-lift"
+            className="relative overflow-hidden rounded-xl border border-line bg-surface-raised shadow-lift"
             initial={reduce ? false : { opacity: 0, scale: 0.985 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
@@ -170,10 +170,10 @@ export function Hero() {
 
             <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-ink-950/92 via-ink-950/55 to-transparent px-4 pb-4 pt-16 md:px-5 md:pb-5">
               <span className="flex flex-col">
-                <span className="script text-[1.35rem] leading-none text-accent">
+                <span className="script text-[1.35rem] leading-none text-spray-300">
                   Before &amp; after
                 </span>
-                <span className="mt-2 text-[0.8125rem] font-medium leading-snug text-silver-200">
+                <span className="mt-2 text-[0.8125rem] font-medium leading-snug text-silver-100">
                   {heroJob.title} · {site.address.city}, {site.address.state}
                 </span>
               </span>
@@ -192,7 +192,7 @@ export function Hero() {
           >
             <LogoBadge
               size={84}
-              className="shadow-[0_18px_40px_-20px_rgba(0,0,0,0.95)] ring-4 ring-ink-950"
+              className="shadow-[0_18px_40px_-20px_rgba(0,0,0,0.95)] ring-4 ring-page"
             />
           </motion.div>
         </div>

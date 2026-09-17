@@ -60,9 +60,7 @@ export function DraftPanel() {
               †
             </span>
             <span className="text-[0.8125rem] leading-relaxed">
-              <span className="font-semibold text-silver-300">
-                {flag.label}.
-              </span>{" "}
+              <span className="font-semibold text-fg">{flag.label}.</span>{" "}
               <span className="text-fg-faint">{flag.note}</span>
             </span>
           </li>
@@ -71,11 +69,11 @@ export function DraftPanel() {
 
       <p className="mt-4 text-[0.75rem] leading-relaxed text-fg-faint">
         Draft content is isolated in{" "}
-        <code className="rounded-xs bg-white/5 px-1 py-0.5 text-silver-300">
+        <code className="rounded-xs bg-veil px-1 py-0.5 text-fg">
           src/lib/site.ts
         </code>{" "}
         and{" "}
-        <code className="rounded-xs bg-white/5 px-1 py-0.5 text-silver-300">
+        <code className="rounded-xs bg-veil px-1 py-0.5 text-fg">
           src/lib/media.ts
         </code>{" "}
         — no other file needs touching.

@@ -57,7 +57,7 @@ export function StickyCTA() {
           animate={{ y: 0 }}
           exit={{ y: 140 }}
           transition={spring}
-          className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink-950/95 backdrop-blur-md lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-page/95 backdrop-blur-md lg:hidden"
           style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
         >
           <div className="shell flex items-center gap-2 pt-3">
@@ -84,12 +84,12 @@ export function StickyCTA() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 90, opacity: 0 }}
           transition={spring}
-          className="fixed bottom-8 right-8 z-40 hidden items-center gap-1.5 rounded-lg border border-line bg-ink-950/90 p-1.5 shadow-lift backdrop-blur-md lg:flex"
+          className="fixed bottom-8 right-8 z-40 hidden items-center gap-1.5 rounded-lg border border-line bg-page/90 p-1.5 shadow-lift backdrop-blur-md lg:flex"
         >
           <a
             href={site.phone.href}
             aria-label={`Call ${site.phone.display}`}
-            className="grid size-11 place-items-center rounded-md border border-line-strong text-accent transition-colors hover:border-accent/70 hover:bg-white/5"
+            className="grid size-11 place-items-center rounded-md border border-line-strong text-accent transition-colors hover:border-accent/70 hover:bg-veil"
           >
             <IconPhone className="size-4" />
           </a>

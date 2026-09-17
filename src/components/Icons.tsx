@@ -162,6 +162,24 @@ export function IconFacebook(props: IconProps) {
   );
 }
 
+/** Sun / moon for the theme toggle. */
+export function IconSun(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
+      <path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M5.2 5.2l1.8 1.8M17 17l1.8 1.8M18.8 5.2 17 7M7 17l-1.8 1.8" />
+    </Svg>
+  );
+}
+
+export function IconMoon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M20 14.4A8.5 8.5 0 0 1 9.6 4a8.5 8.5 0 1 0 10.4 10.4Z" />
+    </Svg>
+  );
+}
+
 /** Filled star, used only by the sample-review attribution. */
 export function IconStar({ className = "size-3.5" }: IconProps) {
   return (

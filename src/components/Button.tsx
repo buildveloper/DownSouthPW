@@ -36,9 +36,9 @@ export function ctaClasses({
 
   const variants: Record<Variant, string> = {
     primary:
-      "bg-accent text-accent-ink hover:bg-spray-300 active:bg-spray-500 shadow-[0_10px_30px_-16px_rgba(129,181,204,0.9)]",
+      "bg-accent-fill text-accent-ink hover:bg-spray-300 active:bg-spray-500 shadow-[0_10px_30px_-16px_rgba(129,181,204,0.9)]",
     outline:
-      "border border-line-strong bg-white/[0.02] text-fg hover:border-accent/70 hover:text-accent hover:bg-white/[0.05]",
+      "border border-line-strong bg-transparent text-fg hover:border-accent/70 hover:bg-veil hover:text-accent",
     outlineLight:
       "border border-ink-900/20 bg-transparent text-fg-on-light hover:border-accent-strong hover:text-accent-strong",
     quiet: "text-fg-muted hover:text-accent underline-offset-4 hover:underline",

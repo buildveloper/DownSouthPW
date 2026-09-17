@@ -25,7 +25,7 @@ export default function NotFound() {
           The link is broken, not your exterior. Head back to the start, or call{" "}
           <a
             href={site.phone.href}
-            className="font-medium text-silver-200 underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent"
+            className="font-medium text-fg underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent"
           >
             {site.phone.display}
           </a>{" "}

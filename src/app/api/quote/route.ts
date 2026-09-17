@@ -253,3 +253,142 @@ async function recordLocally(lead: Lead, fileCount: number, ip: string) {
     "utf8",
   );
 }
+
+export async function POST(request: Request) {
+  let form: FormData;
+  try {
+    form = await request.formData();
+  } catch {
+    return NextResponse.json(
+      { ok: false, message: "Could not read that submission." },
+      { status: 400 },
+    );
+  }
+
+  const read = (key: string) =>
+    String(form.get(key) ?? "")
+      .slice(0, MAX_FIELD_CHARS)
+      .trim();
+
+  const values = {
+    name: read("name"),
+    phone: read("phone"),
+    email: read("email"),
+    service: read("service"),
+    town: read("town"),
+    message: read("message"),
+  };
+
+  // Honeypot: answer cheerfully, deliver nothing.
+  if (read("company")) {
+    return NextResponse.json({ ok: true, delivered: [] });
+  }
+
+  const errors: Record<string, string> = {};
+  if (values.name.length < 2) errors.name = "Name is required.";
+  if (values.phone.replace(/\D/g, "").length < 10) {
+    errors.phone = "A reachable 10-digit phone number is required.";
+  }
+  if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email)) {
+    errors.email = "That email address does not look right.";
+  }
+  if (!values.service) errors.service = "Please choose a service.";
+
+  if (Object.keys(errors).length > 0) {
+    return NextResponse.json(
+      { ok: false, message: "Please check the highlighted fields.", errors },
+      { status: 422 },
+    );
+  }
+
+  const files = form
+    .getAll("photos")
+    .filter((entry): entry is File => entry instanceof File && entry.size > 0)
+    .slice(0, MAX_FILES);
+
+  for (const file of files) {
+    if (file.size > MAX_FILE_BYTES) {
+      return NextResponse.json(
+        { ok: false, message: "Photos need to be under 5MB each." },
+        { status: 413 },
+      );
+    }
+    if (!file.type.startsWith("image/")) {
+      return NextResponse.json(
+        { ok: false, message: "Photos only, please — JPEG, PNG or HEIC." },
+        { status: 415 },
+      );
+    }
+  }
+
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+
+  if (rateLimited(ip)) {
+    return NextResponse.json(
+      {
+        ok: false,
+        message:
+          "Too many requests in a row. Give it a few minutes, or just call instead.",
+      },
+      { status: 429 },
+    );
+  }
+
+  const serviceLabel =
+    services.find((service) => service.id === values.service)?.title ??
+    (values.service === "not-sure" ? "Not sure yet" : "General enquiry");
+
+  const lead = buildLead({ ...values, serviceLabel });
+
+  const delivered: string[] = [];
+  const problems: string[] = [];
+
+  try {
+    await recordLocally(lead, files.length, ip);
+    delivered.push("log");
+  } catch (error) {
+    problems.push(`log: ${reason(error)}`);
+  }
+
+  if (process.env.RESEND_API_KEY) {
+    try {
+      delivered.push(await sendViaResend(lead, files));
+    } catch (error) {
+      problems.push(reason(error));
+    }
+  } else {
+    try {
+      delivered.push(await sendViaFormSubmit(lead, files));
+    } catch (error) {
+      problems.push(reason(error));
+    }
+  }
+
+  try {
+    const sms = await sendViaTwilio(lead);
+    if (sms) delivered.push(sms);
+  } catch (error) {
+    problems.push(`sms: ${reason(error)}`);
+  }
+
+  const emailed =
+    delivered.includes("resend") || delivered.includes("formsubmit");
+
+  if (!emailed) {
+    console.error("[quote] no email channel delivered", {
+      problems,
+      lead: lead.text,
+    });
+    return NextResponse.json(
+      {
+        ok: false,
+        message:
+          "We could not get that emailed through. Call or text and it will get handled straight away.",
+      },
+      { status: 502 },
+    );
+  }
+
+  return NextResponse.json({ ok: true, delivered });
+}

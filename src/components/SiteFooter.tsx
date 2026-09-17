@@ -19,7 +19,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-line bg-ink-950">
+    <footer className="relative border-t border-line bg-page">
       <div className="shell py-14 md:py-16">
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">
@@ -32,14 +32,14 @@ export function SiteFooter() {
             <div className="mt-7 flex flex-col gap-3">
               <a
                 href={site.phone.href}
-                className="inline-flex items-center gap-3 text-[1rem] font-semibold text-silver-100 transition-colors hover:text-accent"
+                className="inline-flex items-center gap-3 text-[1rem] font-semibold text-fg-strong transition-colors hover:text-accent"
               >
                 <IconPhone className="size-5 text-accent" />
                 {site.phone.display}
               </a>
               <a
                 href={`mailto:${site.email}`}
-                className="inline-flex items-start gap-3 text-[0.9375rem] text-silver-300 transition-colors hover:text-accent"
+                className="inline-flex items-start gap-3 text-[0.9375rem] text-fg-muted transition-colors hover:text-accent"
               >
                 <IconMail className="mt-0.5 size-5 shrink-0 text-accent" />
                 <span className="break-all">{site.email}</span>
@@ -50,7 +50,7 @@ export function SiteFooter() {
               href={site.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-7 inline-flex items-center gap-2.5 rounded-md border border-line-strong px-3.5 py-2.5 text-[0.8125rem] font-semibold text-silver-200 transition-colors hover:border-accent/70 hover:text-accent"
+              className="mt-7 inline-flex items-center gap-2.5 rounded-md border border-line-strong px-3.5 py-2.5 text-[0.8125rem] font-semibold text-fg transition-colors hover:border-accent/70 hover:text-accent"
             >
               <IconFacebook className="size-4" />
               facebook.com/DownSouthPW
@@ -66,7 +66,7 @@ export function SiteFooter() {
                 <li key={service.id}>
                   <a
                     href="#services"
-                    className="text-[0.9375rem] text-silver-300 transition-colors hover:text-accent"
+                    className="text-[0.9375rem] text-fg-muted transition-colors hover:text-accent"
                   >
                     {service.title}
                   </a>
@@ -79,7 +79,7 @@ export function SiteFooter() {
             <h2 className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-fg-faint">
               Where we work
             </h2>
-            <ul className="mt-5 flex flex-col gap-3 text-[0.9375rem] text-silver-300">
+            <ul className="mt-5 flex flex-col gap-3 text-[0.9375rem] text-fg-muted">
               <li className="flex items-start gap-2.5">
                 <IconPin className="mt-0.5 size-4 shrink-0 text-accent" />
                 <span>
@@ -87,15 +87,15 @@ export function SiteFooter() {
                   <DraftFlag label="service area" />
                 </span>
               </li>
-              <li className="text-fg-muted">
+              <li>
                 {site.hours.label}
                 <DraftFlag label="working hours" />
               </li>
-              <li className="text-fg-muted">
+              <li>
                 Free estimates ·{" "}
                 <a
                   href="#quote"
-                  className="text-silver-200 underline decoration-line-strong underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+                  className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
                 >
                   send a photo
                 </a>

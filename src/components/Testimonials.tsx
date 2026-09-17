@@ -29,7 +29,7 @@ export function Testimonials() {
             </span>
 
             <blockquote className="mt-5 flex-1">
-              <p className="text-[1rem] leading-relaxed text-silver-200">
+              <p className="text-[1rem] leading-relaxed text-fg">
                 {item.quote}
               </p>
             </blockquote>
@@ -56,10 +56,10 @@ export function Testimonials() {
           †
         </span>
         Editable in{" "}
-        <code className="rounded-xs bg-white/5 px-1 py-0.5 text-silver-300">
+        <code className="rounded-xs bg-veil px-1 py-0.5 text-fg">
           src/lib/site.ts
         </code>{" "}
-        → <code className="rounded-xs bg-white/5 px-1 py-0.5 text-silver-300">
+        → <code className="rounded-xs bg-veil px-1 py-0.5 text-fg">
           testimonials
         </code>
         . Replace the quotes and swap the attribution lines for real names, towns

@@ -51,7 +51,7 @@ export function FinalCTA() {
             href={site.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-silver-300 underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+            className="font-medium text-fg underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
           >
             More work on Facebook
           </a>

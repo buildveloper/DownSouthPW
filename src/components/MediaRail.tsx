@@ -84,15 +84,15 @@ export function MediaRail({
   const captionTitle =
     tone === "light"
       ? "text-[0.9375rem] font-semibold text-ink-900"
-      : "text-[0.9375rem] font-semibold text-silver-100";
+      : "text-[0.9375rem] font-semibold text-fg-strong";
   const captionNote =
     tone === "light"
       ? "text-[0.8125rem] text-fg-on-light-muted"
       : "text-[0.8125rem] text-fg-faint";
   const tileBorder =
     tone === "light"
-      ? "border-ink-900/10 bg-ink-900/[0.04]"
-      : "border-line bg-ink-900";
+      ? "border-ink-900/10 bg-card-light"
+      : "border-line bg-surface-raised";
 
   return (
     <div role="region" aria-label={label} className="mt-10 md:mt-12">
@@ -204,7 +204,7 @@ function RailButton({
       className={`inline-flex size-11 items-center justify-center rounded-md border transition-colors duration-200 disabled:opacity-35 ${
         tone === "light"
           ? "border-ink-900/15 text-ink-900 hover:border-accent-strong hover:bg-ink-900/[0.04] disabled:hover:border-ink-900/15 disabled:hover:bg-transparent"
-          : "border-line-strong text-silver-200 hover:border-accent/70 hover:bg-white/[0.04] disabled:hover:border-line-strong disabled:hover:bg-transparent"
+          : "border-line-strong text-fg hover:border-accent/70 hover:bg-veil disabled:hover:border-line-strong disabled:hover:bg-transparent"
       }`}
     >
       {children}

@@ -28,5 +28,12 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 
+# local scratch logs
+/.npm-*.log
+/.build-*.log
+/.tsc-*.log
+/.serve-*.log
+/logo-inspect.png
+
 # OS
 Thumbs.db

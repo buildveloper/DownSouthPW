@@ -23,7 +23,7 @@ export function LogoBadge({
 }) {
   return (
     <span
-      className={`relative inline-grid shrink-0 place-items-center overflow-hidden rounded-full bg-black ring-1 ring-white/15 ${className}`}
+      className={`relative inline-grid shrink-0 place-items-center overflow-hidden rounded-full bg-black ring-1 ring-plate-ring ${className}`}
       style={{ width: size, height: size }}
     >
       <Image
